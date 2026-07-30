@@ -1,7 +1,8 @@
 # Model Card: PortWatch AI Congestion Forecaster
 
 ## Model Details
-- **Developed by:** Jules
+- **Developed by:** PortWatch AI Team
+
 - **Model type:** XGBoost Regressor + Classifier ensemble
 - **Version:** 1.0.0
 - **License:** MIT

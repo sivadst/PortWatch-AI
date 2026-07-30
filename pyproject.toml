@@ -6,7 +6,8 @@ build-backend = "setuptools.build_meta"
 name = "portwatch-ai"
 version = "1.0.0"
 description = "Global Supply Chain Disruption Intelligence"
-authors = [{ name = "Jules" }]
+authors = [{ name = "PortWatch AI Team" }]
+
 requires-python = ">=3.11"
 dependencies = [
     "fastapi>=0.100.0",
