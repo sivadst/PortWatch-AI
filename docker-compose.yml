@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/portwatch
+      - USE_SAMPLE_DATA=false
+    depends_on:
+      - db
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: portwatch
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init_db.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+
+  streamlit:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      - API_URL=http://api:8000
+      - USE_SAMPLE_DATA=false
+    depends_on:
+      - api
+    command: streamlit run app/Home.py --server.port=8501 --server.address=0.0.0.0
+
+volumes:
+  postgres_data:
